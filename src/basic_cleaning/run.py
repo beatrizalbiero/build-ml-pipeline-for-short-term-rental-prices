@@ -27,11 +27,12 @@ def go(args):
     max_price = args.max_price
     idx = df['price'].between(min_price, max_price)
     df = df[idx].copy()
+    logger.info("Min price: {}, Max price: {}".format(df.price.min(), df.price.max()))
     logger.info("Removed Outliers")
     # Convert last_review to datetime
     df['last_review'] = pd.to_datetime(df['last_review'])
     logger.info("Converted last_review to datetime.")
-    logger.info(df.info())
+    logger.info("{}".format(df.info()))
 
     #Upload to W&B
     df.to_csv("clean_sample.csv", index=False)
